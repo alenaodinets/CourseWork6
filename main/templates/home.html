@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="row">
+    {% for blog in blog_list %}
+        <div class="col-4">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column">
+                    <h3 class="mb-0">{{ blog.title }}</h3>
+                    <img height="250" src="{{ blog.image | media_filter }}">
+                    <div class="mb-1 text-muted">{{ blog.created_at }}</div>
+                    <p class="card-text mb-auto">{{ blog.content }}</p>
+                    <a href="{% url 'blog:blog_detail' blog.pk %}">Подробнее</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<div class="row text-center">
+    <div class="col-4">
+        <div class="card mb-4 rounded-3">
+            <div class="card-header">
+                <h4 class="my-0 fw-normal">Общее количество рассылок</h4>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title">{{ sendings_count }}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card mb-4 rounded-3">
+            <div class="card-header">
+                <h4 class="my-0 fw-normal">Количество активных рассылок</h4>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title">{{ active_sendings_count }}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card mb-4 rounded-3">
+            <div class="card-header">
+                <h4 class="my-0 fw-normal">Количество клиентов сервиса</h4>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title">{{ clients_count }}</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

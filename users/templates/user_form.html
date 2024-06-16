@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <form method="post" action="" class="form-floating" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-4">
+                    <img width="300" src="{{ users.avatar | media_filter }}}">
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                Редактирование профиля
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="submit" class="btn btn-lg btn-block btn-outline-primary">
+                                Сохранить
+                            </button>
+                            <a href="{% url 'users:recover' %}" class="btn btn-danger">Забыли пароль?</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

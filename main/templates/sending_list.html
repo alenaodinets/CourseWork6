@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load my_tags %}
+{% block content %}
+<div class="col-12 mb-5">
+    <a class="p-2 btn btn-outline-primary" href="/sending/create/">Создать рассылку</a>
+    {% for object in object_list %}
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ object.message }}</h5>
+                    <p class="card-text">{{ object.period }}</p>
+                    <a href="{% url 'main:sending_detail' object.pk %}" class="btn btn-primary">Подробнее</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

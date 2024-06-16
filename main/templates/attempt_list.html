@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load my_tags %}
+{% block content %}
+<div class="col-12 mb-5">
+    <h2>История рассылок {{ object }}</h2>
+    {% for trial in trials %}
+        <div class="row">
+            <p>{{ trial }}</p>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

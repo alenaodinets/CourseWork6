@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" action="" class="form-floating" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <p>Удалить клиента "{{ object.name }}"?</p>
+                    <button type="submit" class="btn btn-lg btn-block btn-outline-danger">
+                            Да
+                    </button>
+                    <a href="{% url 'main:client_list'%}" class="btn btn-outline-warning">Нет</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

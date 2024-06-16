@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <h2>Рассылка: {{ object.message }}</h2>
+        </div>
+        <div class="col-12">
+            <p>Статус: {{ object.status }}</p>
+            {% if object.is_active %}
+                <p>Активна</p>
+            {% else %}
+                <p>Не активна</p>
+            {% endif %}
+            <p>Период: {{ object.period }}</p>
+            <p>Дата начала: {{ object.start_at }}</p>
+            <p>Дата окончания: {{ object.finish_at }}</p>
+            <p>Дата и время первой отправки: {{ object.sent_at }}</p>
+            {% if object.clients %}
+                <p>Список получателей:</p>
+                {% for client in clients %}
+                    <p>- {{ client }}<p>
+                {% endfor %}
+            {% endif %}
+            <a href="{% url 'main:trial_list' object.pk %}" class="btn btn-warning">История рассылки</a>
+            {% if perms.main.change_sending or sending.owner == request.user %}
+                <a href="{% url 'main:sending_update' object.pk %}" class="btn btn-success">Изменить</a>
+            {% endif %}
+            {% if perms.main.delete_sending or sending.owner == request.user %}
+                <a href="{% url 'main:sending_delete' object.pk %}" class="btn btn-danger">Удалить</a>
+            {% endif %}
+            {% if perms.main.set_active %}
+            <a href="{% url 'main:sending_moderation' object.pk  %}" type="button"
+                   class="btn btn-danger">Изменить активность</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
