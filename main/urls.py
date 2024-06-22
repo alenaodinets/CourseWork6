@@ -9,7 +9,7 @@ from main.views import HomeView, SendingListView, MessageListView, ClientListVie
 app_name = apps.MainConfig.name
 
 urlpatterns = [
-    path('', HomeView.as_view(), name='home'),
+    path('', cache_page(100)(HomeView.as_view()), name='home'),
     path('sending/', SendingListView.as_view(), name='sending_list'),
     path('messages/', MessageListView.as_view(), name='message_list'),
     path('clients/', ClientListView.as_view(), name='client_list'),
